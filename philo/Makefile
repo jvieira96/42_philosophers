@@ -6,7 +6,7 @@
 #    By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/28 13:17:03 by jpedro-fvm        #+#    #+#              #
-#    Updated: 2025/06/28 14:03:46 by jpedro-fvm       ###   ########.fr        #
+#    Updated: 2025/06/28 14:30:09 by jpedro-fvm       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJS = $(SRCS:.c=.o)
 
 C_COMP = cc
 
-C_FLAGS = -Wall -Werror -Wextra -g
+C_FLAGS = -Wall -Werror -Wextra -pthread -g
 
 RM = rm -f 
 

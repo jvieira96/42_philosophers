@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/28 12:49:01 by jpedro-fvm        #+#    #+#             */
-/*   Updated: 2025/06/28 18:07:56 by jpedro-fvm       ###   ########.fr       */
+/*   Created: 2025/06/28 18:08:48 by jpedro-fvm        #+#    #+#             */
+/*   Updated: 2025/06/28 18:19:48 by jpedro-fvm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
- 
-int	main(int argc, char *argv[])
-{
-	t_data	*data;
 
-	if (argc == 5 || argc == 6)
-	{
-		parsing(&data, argv);
-		data_init(&data);
-		start_dinner(&data);
-		clean(&data);
-	}
-	else
-		printf("Error: wrong number of arguments");
-	return (0);
+void	parse_input(t_data data, char **args)
+{
+		
 }

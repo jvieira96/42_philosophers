@@ -6,7 +6,7 @@
 /*   By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 12:49:01 by jpedro-fvm        #+#    #+#             */
-/*   Updated: 2025/06/28 13:12:00 by jpedro-fvm       ###   ########.fr       */
+/*   Updated: 2025/06/28 14:05:59 by jpedro-fvm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ph_wrong_args(char *args[])
 	int	i;
 	int	x;
 
-	i = 0;
+	i = 1;
 	while (args[i])
 	{
 		x = 0;
@@ -43,14 +43,14 @@ int	ph_wrong_args(char *args[])
 	return (0);
 }
 
-void	main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	if (argc < 5 || argc > 6)
 	{
-		printf (" Wrong number of arguments");
-		return ;
+		printf ("Wrong number of arguments");
+		return (1);
 	}
 	if (ph_wrong_args(argv))
-		return ;
-	return ;
+		return (2);
+	return (0);
 }

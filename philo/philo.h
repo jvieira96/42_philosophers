@@ -6,7 +6,7 @@
 /*   By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 12:49:30 by jpedro-fvm        #+#    #+#             */
-/*   Updated: 2025/06/29 15:38:32 by jpedro-fvm       ###   ########.fr       */
+/*   Updated: 2025/06/29 18:17:37 by jpedro-fvm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,20 @@ typedef	struct s_philo
 	long		last_meal;
 	long		meals_counter;
 	bool		full;
-	t_fork		*left_fork;
-	t_fork		*right_fork;
+	t_fork		*first_fork;
+	t_fork		*second_fork;
 	t_data		*data;
 }				t_philo;
 
 
-//parsing.c
+//parsing.cv
 bool	ft_isnumeric(char *str);
 bool	ft_isspace(char c);
 bool	ft_valid_input(char *str);
 int		ft_atol(char *str);
 bool	ft_parse_input(t_data *data, char **args);
+
+//data_init.c
+void	ft_assign_forks(t_philo *philo, t_fork *forks, int philo_position);
+void	ft_philo_init(t_data *data);
+bool	data_init(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 12:49:01 by jpedro-fvm        #+#    #+#             */
-/*   Updated: 2025/06/29 15:39:09 by jpedro-fvm       ###   ########.fr       */
+/*   Updated: 2025/06/29 18:12:06 by jpedro-fvm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,14 @@ int	main(int argc, char *argv[])
 
 	if (argc == 5 || argc == 6)
 	{
-		if (!ft_parse_input(&data, argv))
+		if (!parsing(&data, argv))
 			return (0);
-		// data_init(&data);
+		if (!data_init(&data));
+		{
+			// clean(&data);
+			printf(RED "Malloc failed!" RESET "\n");
+			return (0);
+		}
 		// start_dinner(&data);
 		// clean(&data);
 	}

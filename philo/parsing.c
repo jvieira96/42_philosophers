@@ -6,7 +6,7 @@
 /*   By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:08:48 by jpedro-fvm        #+#    #+#             */
-/*   Updated: 2025/06/29 15:38:23 by jpedro-fvm       ###   ########.fr       */
+/*   Updated: 2025/06/29 17:25:27 by jpedro-fvm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	ft_atol(char *str)
 	return (number);
 }
 
-bool	ft_parse_input(t_data *data, char **args)
+bool	parsing(t_data *data, char **args)
 {
 	data->philo_nbr = ft_atol(args[1]);
 	if (data->philo_nbr == PARSE_ERROR)

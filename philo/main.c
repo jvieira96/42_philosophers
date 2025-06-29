@@ -6,7 +6,7 @@
 /*   By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 12:49:01 by jpedro-fvm        #+#    #+#             */
-/*   Updated: 2025/06/28 18:07:56 by jpedro-fvm       ###   ########.fr       */
+/*   Updated: 2025/06/29 15:39:09 by jpedro-fvm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
  
 int	main(int argc, char *argv[])
 {
-	t_data	*data;
+	t_data	data;
 
 	if (argc == 5 || argc == 6)
 	{
-		parsing(&data, argv);
-		data_init(&data);
-		start_dinner(&data);
-		clean(&data);
+		if (!ft_parse_input(&data, argv))
+			return (0);
+		// data_init(&data);
+		// start_dinner(&data);
+		// clean(&data);
 	}
 	else
-		printf("Error: wrong number of arguments");
+		printf(RED "Error: wrong number of arguments" RESET "\n");
 	return (0);
 }

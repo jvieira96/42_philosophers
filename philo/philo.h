@@ -6,7 +6,7 @@
 /*   By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 12:49:30 by jpedro-fvm        #+#    #+#             */
-/*   Updated: 2025/06/28 18:08:27 by jpedro-fvm       ###   ########.fr       */
+/*   Updated: 2025/06/29 15:38:32 by jpedro-fvm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@
 #include <pthread.h>
 #include <sys/time.h>  
 #include <stdbool.h>
+#include <limits.h>
+
+#define PARSE_ERROR -2
+#define NO_TIMES_TO_EAT -1
+
+
+#define RESET   "\x1b[0m"
+#define RED     "\x1b[31m"
+#define GREEN   "\x1b[32m"
+#define BLUE    "\x1b[34m"
+#define YELLOW  "\x1b[33m"
 
 typedef	struct s_fork
 {
@@ -23,6 +34,7 @@ typedef	struct s_fork
 	pthread_mutex_t	fork;
 }					t_fork;
 
+typedef struct s_philo t_philo;
 
 typedef struct s_data
 {
@@ -34,7 +46,7 @@ typedef struct s_data
 	long		start_dinner;
 	bool		end_dinner;
 	t_fork		*forks;
-	t_philo		*philos;
+	t_philo		*philo;
 }				t_data;
 
 typedef	struct s_philo
@@ -51,3 +63,8 @@ typedef	struct s_philo
 
 
 //parsing.c
+bool	ft_isnumeric(char *str);
+bool	ft_isspace(char c);
+bool	ft_valid_input(char *str);
+int		ft_atol(char *str);
+bool	ft_parse_input(t_data *data, char **args);

@@ -6,7 +6,7 @@
 #    By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/28 13:17:03 by jpedro-fvm        #+#    #+#              #
-#    Updated: 2025/06/29 15:37:30 by jpedro-fvm       ###   ########.fr        #
+#    Updated: 2025/06/30 11:50:21 by jpedro-fvm       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ NAME = philo
 HEADER_PATH = philo.h 
 
 SRCS = 	main.c \
-		parsing.c
+		parsing.c \
+		data_init.c
 
 OBJS = $(SRCS:.c=.o)
 

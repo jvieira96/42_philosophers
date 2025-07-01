@@ -6,7 +6,7 @@
 /*   By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 17:26:40 by jpedro-fvm        #+#    #+#             */
-/*   Updated: 2025/06/29 18:09:16 by jpedro-fvm       ###   ########.fr       */
+/*   Updated: 2025/07/01 17:28:50 by jpedro-fvm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ bool	data_init(t_data *data)
 
 	i = 0;
 	data->end_dinner = false;
+	data->all_threads_ready = false;
 	data->philo = malloc(sizeof(t_philo) * data->philo_nbr);
 	if (!data->philo)
 		return (false);
@@ -60,8 +61,9 @@ bool	data_init(t_data *data)
 		return (false);
 	while (i < data->philo_nbr)
 	{
-		pthread_mutex_init(&data->forks[i].fork, NULL);
+		mutex_handler(&data->forks[i].fork, INIT);
 		i++;
 	}
 	ft_philo_init(data);
+	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:08:48 by jpedro-fvm        #+#    #+#             */
-/*   Updated: 2025/06/29 17:25:27 by jpedro-fvm       ###   ########.fr       */
+/*   Updated: 2025/06/30 11:42:12 by jpedro-fvm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,27 +88,27 @@ int	ft_atol(char *str)
 	return (number);
 }
 
-bool	parsing(t_data *data, char **args)
+int	parsing(t_data *data, char **args)
 {
 	data->philo_nbr = ft_atol(args[1]);
 	if (data->philo_nbr == PARSE_ERROR)
-		return(false);
-	data->time_to_die = ft_atol(args[2]); 
-	if (data->time_to_die == PARSE_ERROR)
-		return (false);
-	data->time_to_eat = ft_atol(args[3]);
-	if (data->time_to_eat == PARSE_ERROR)
-		return (false);
-	data->time_to_sleep = ft_atol(args[4]);
-	if (data->time_to_sleep == PARSE_ERROR)
-		return (false);
+		return(data->philo_nbr);
+	data->time_to_die = ft_atol(args[2]) * 1000; 
+	if (data->time_to_die < 60000)
+		return (data->time_to_die);
+	data->time_to_eat = ft_atol(args[3]) * 1000;
+	if (data->time_to_eat < 60000)
+		return (data->time_to_eat);
+	data->time_to_sleep = ft_atol(args[4]) * 1000;
+	if (data->time_to_sleep < 60000)
+		return (data->time_to_sleep);
 	if (args[5])
 	{
 		data->nbr_times_eat = ft_atol(args[5]);
 		if (data->nbr_times_eat == PARSE_ERROR)
-			return (false);
+			return (data->nbr_times_eat);
 	}
 	else
 		data->nbr_times_eat = NO_TIMES_TO_EAT;
-	return (true) ;
+	return (0) ;
 }

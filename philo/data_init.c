@@ -6,7 +6,7 @@
 /*   By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 17:26:40 by jpedro-fvm        #+#    #+#             */
-/*   Updated: 2025/07/01 17:28:50 by jpedro-fvm       ###   ########.fr       */
+/*   Updated: 2025/07/07 17:34:12 by jpedro-fvm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ void	ft_philo_init(t_data *data)
 		philo->full = false;
 		philo->meals_counter = 0;
 		philo->data = data;
+		mutex_handler(&philo->philo_mutex, INIT);
 		ft_assign_forks(philo, data->forks, i);
+		i++;
 	}
 }
 
@@ -53,12 +55,14 @@ bool	data_init(t_data *data)
 	i = 0;
 	data->end_dinner = false;
 	data->all_threads_ready = false;
+	data->nbr_threads_running = 0;
 	data->philo = malloc(sizeof(t_philo) * data->philo_nbr);
 	if (!data->philo)
 		return (false);
 	data->forks = malloc(sizeof(t_fork) * data->philo_nbr);
 	if (!data->forks)
 		return (false);
+	mutex_handler(&data->table_mutex, INIT);
 	while (i < data->philo_nbr)
 	{
 		mutex_handler(&data->forks[i].fork, INIT);

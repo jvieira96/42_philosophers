@@ -6,7 +6,7 @@
 /*   By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:08:48 by jpedro-fvm        #+#    #+#             */
-/*   Updated: 2025/06/30 11:42:12 by jpedro-fvm       ###   ########.fr       */
+/*   Updated: 2025/07/07 18:00:04 by jpedro-fvm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,16 @@ int	parsing(t_data *data, char **args)
 {
 	data->philo_nbr = ft_atol(args[1]);
 	if (data->philo_nbr == PARSE_ERROR)
-		return(data->philo_nbr);
-	data->time_to_die = ft_atol(args[2]) * 1000; 
+		return(false);
+	data->time_to_die = ft_atol(args[2]) * 1e3; 
 	if (data->time_to_die < 60000)
-		return (data->time_to_die);
-	data->time_to_eat = ft_atol(args[3]) * 1000;
+		return (false);
+	data->time_to_eat = ft_atol(args[3]) * 1e3;
 	if (data->time_to_eat < 60000)
-		return (data->time_to_eat);
-	data->time_to_sleep = ft_atol(args[4]) * 1000;
+		return (false);
+	data->time_to_sleep = ft_atol(args[4]) * 1e3;
 	if (data->time_to_sleep < 60000)
-		return (data->time_to_sleep);
+		return (false);
 	if (args[5])
 	{
 		data->nbr_times_eat = ft_atol(args[5]);
@@ -110,5 +110,5 @@ int	parsing(t_data *data, char **args)
 	}
 	else
 		data->nbr_times_eat = NO_TIMES_TO_EAT;
-	return (0) ;
+	return (true) ;
 }

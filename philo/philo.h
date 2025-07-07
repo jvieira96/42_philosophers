@@ -6,7 +6,7 @@
 /*   By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 12:49:30 by jpedro-fvm        #+#    #+#             */
-/*   Updated: 2025/07/01 17:47:31 by jpedro-fvm       ###   ########.fr       */
+/*   Updated: 2025/07/07 17:36:38 by jpedro-fvm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,23 @@ typedef enum e_opcode
 	DETACH,
 }	t_opcode;
 
+typedef enum e_time_code
+{
+	SECONDS,
+	MILISECONDS,
+	MICROSECONDS,
+}	t_time_code;
+
+typedef enum e_philo_status
+{
+	EATING,
+	SLEEPING,
+	THINKING,
+	TAKE_FIRST_FORK,
+	TAKE_SECOND_FORK,
+	DIED,
+}	t_philo_status;
+
 typedef	struct s_fork
 {
 	int				fork_id;
@@ -57,21 +74,25 @@ typedef struct s_data
 	long			start_dinner;
 	bool			end_dinner;
 	bool			all_threads_ready;
+	long			nbr_threads_running;
+	pthread_t		monitor;
 	pthread_mutex_t	table_mutex;
+	pthread_mutex_t	write_lock;
 	t_fork			*forks;
 	t_philo			*philo;
 }					t_data;
 
 typedef	struct s_philo
 {
-	int			id;
-	pthread_t	thread_id;
-	long		last_meal;
-	long		meals_counter;
-	bool		full;
-	t_fork		*first_fork;
-	t_fork		*second_fork;
-	t_data		*data;
+	int				id;
+	pthread_t		thread_id;
+	long			last_meal;
+	long			meals_counter;
+	bool			full;
+	t_fork			*first_fork;
+	t_fork			*second_fork;
+	t_data			*data;
+	pthread_mutex_t	philo_mutex;
 }				t_philo;
 
 
@@ -89,4 +110,33 @@ bool	data_init(t_data *data);
 
 //handle_threads.c
 void	mutex_handler(pthread_mutex_t *mutex, t_opcode opcode);
-void	tread_handle(pthread_t *thread, void *(*routine)(void*), void *data, t_opcode opcode);
+void	thread_handle(pthread_t *thread, void *(*routine)(void*), void *data, t_opcode opcode);
+
+//getters_setters.c
+void	set_bool(pthread_mutex_t *mutex, bool *dest, bool value);
+bool	get_bool(pthread_mutex_t *mutex, bool *value);
+void	set_long(pthread_mutex_t *mutex, long *dest, long value);
+long	get_long(pthread_mutex_t *mutex, long *value);
+bool	simulation_finished(t_data *data);
+
+//sync_utils.c
+void	wait_all_threads(t_data *data);
+bool	all_threads_running(pthread_mutex_t *mutex, long *threads, long philo_nbr);
+void	increase_long(pthread_mutex_t *mutex, long *value);
+
+//utils.c
+long	get_time(t_time_code time_code);
+void	precise_usleep(long usec, t_data *data);
+void	clean(t_data *data);
+
+//write.c
+void	write_status(t_philo_status status, t_philo *philo);
+
+//start_dinner.c
+void	eat(t_philo *philo);
+void	*dinner_sim(void *data);
+bool	start_dinner(t_data *data);
+
+//monitor.c
+bool 	philo_died(t_philo *philo);
+void	*monitor_dinner(void *data);

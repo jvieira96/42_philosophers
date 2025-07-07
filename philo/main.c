@@ -6,7 +6,7 @@
 /*   By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 12:49:01 by jpedro-fvm        #+#    #+#             */
-/*   Updated: 2025/06/30 11:50:06 by jpedro-fvm       ###   ########.fr       */
+/*   Updated: 2025/07/07 17:34:01 by jpedro-fvm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int	main(int argc, char *argv[])
 	{
 		if (!parsing(&data, argv))
 			return (EXIT_FAILURE);
-		if (data_init(&data))
+		if (!data_init(&data))
 		{
 			printf(RED " Wrong input!" RESET "\n");
 			return (0);
 		}
-		// start_dinner(&data);
-		// clean(&data);
+		start_dinner(&data);
+		clean(&data);
 	}
 	else
 		printf(RED "Error: wrong number of arguments" RESET "\n");

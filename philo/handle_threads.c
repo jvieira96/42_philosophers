@@ -6,11 +6,11 @@
 /*   By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 17:00:42 by jpedro-fvm        #+#    #+#             */
-/*   Updated: 2025/07/01 17:22:28 by jpedro-fvm       ###   ########.fr       */
+/*   Updated: 2025/07/07 15:13:42 by jpedro-fvm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philo.h>
+#include "philo.h"
 
 void	mutex_handler(pthread_mutex_t *mutex, t_opcode opcode)
 {
@@ -24,7 +24,7 @@ void	mutex_handler(pthread_mutex_t *mutex, t_opcode opcode)
 		pthread_mutex_destroy(mutex);
 }
 
-void	tread_handle(pthread_t *thread, void *(*routine)(void*), void *data, t_opcode opcode)
+void	thread_handle(pthread_t *thread, void *(*routine)(void*), void *data, t_opcode opcode)
 {
 	if (opcode == CREATE)
 		pthread_create(thread, NULL, routine, data);

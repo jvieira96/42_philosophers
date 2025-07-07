@@ -6,7 +6,7 @@
 #    By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/28 13:17:03 by jpedro-fvm        #+#    #+#              #
-#    Updated: 2025/06/30 11:50:21 by jpedro-fvm       ###   ########.fr        #
+#    Updated: 2025/07/07 16:23:18 by jpedro-fvm       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,15 @@ HEADER_PATH = philo.h
 
 SRCS = 	main.c \
 		parsing.c \
-		data_init.c
+		data_init.c \
+		start_dinner.c \
+		handle_threads.c \
+		getters_setters.c \
+		sync_utils.c \
+		utils.c \
+		write.c \
+		monitor.c 
+
 
 OBJS = $(SRCS:.c=.o)
 

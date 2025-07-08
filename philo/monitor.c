@@ -6,7 +6,7 @@
 /*   By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:22:42 by jpedro-fvm        #+#    #+#             */
-/*   Updated: 2025/07/08 11:40:28 by jpedro-fvm       ###   ########.fr       */
+/*   Updated: 2025/07/08 12:57:37 by jpedro-fvm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	*monitor_dinner(void *data)
 	int		i;
 
 	table = (t_data *)data;
-	while (!all_threads_running(&table->table_mutex, &table->nbr_threads_running, table->philo_nbr));
+	while (!all_threads_running(&table->table_mutex, &table->nbr_threads_running, table->philo_nbr))
 		;
 	while (!simulation_finished(table))
 	{

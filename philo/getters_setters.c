@@ -46,7 +46,7 @@ long	get_long(pthread_mutex_t *mutex, long *value)
 	return (ret);
 }
 
-bool	 simulation_finished(t_data *data)
+bool	simulation_finished(t_data *data)
 {
 	return (get_bool(&data->table_mutex, &data->end_dinner));
 }

@@ -21,12 +21,12 @@
 #define PARSE_ERROR -2
 #define NO_TIMES_TO_EAT -1
 
-
 #define RESET   "\x1b[0m"
 #define RED     "\x1b[31m"
 #define GREEN   "\x1b[32m"
 #define BLUE    "\x1b[34m"
 #define YELLOW  "\x1b[33m"
+#define CYAN    "\x1b[36m"
 
 typedef enum e_opcode
 {
@@ -56,13 +56,13 @@ typedef enum e_philo_status
 	DIED,
 }	t_philo_status;
 
-typedef	struct s_fork
+typedef struct s_fork
 {
 	int				fork_id;
 	pthread_mutex_t	fork;
 }					t_fork;
 
-typedef struct s_philo t_philo;
+typedef struct s_philo	t_philo;
 
 typedef struct s_data
 {
@@ -82,7 +82,7 @@ typedef struct s_data
 	t_philo			*philo;
 }					t_data;
 
-typedef	struct s_philo
+typedef struct s_philo
 {
 	int				id;
 	pthread_t		thread_id;
@@ -94,7 +94,6 @@ typedef	struct s_philo
 	t_data			*data;
 	pthread_mutex_t	philo_mutex;
 }				t_philo;
-
 
 //parsing.cv
 bool	ft_isnumeric(char *str);
@@ -110,7 +109,8 @@ bool	data_init(t_data *data);
 
 //handle_threads.c
 void	mutex_handler(pthread_mutex_t *mutex, t_opcode opcode);
-void	thread_handle(pthread_t *thread, void *(*routine)(void*), void *data, t_opcode opcode);
+void	thread_handle(pthread_t *thread, \
+void *(*routine)(void*), void *data, t_opcode opcode);
 
 //getters_setters.c
 void	set_bool(pthread_mutex_t *mutex, bool *dest, bool value);
@@ -121,7 +121,8 @@ bool	simulation_finished(t_data *data);
 
 //sync_utils.c
 void	wait_all_threads(t_data *data);
-bool	all_threads_running(pthread_mutex_t *mutex, long *threads, long philo_nbr);
+bool	all_threads_running(pthread_mutex_t *mutex, \
+long *threads, long philo_nbr);
 void	increase_long(pthread_mutex_t *mutex, long *value);
 void	de_sync_philos(t_philo *philo);
 
@@ -135,11 +136,11 @@ void	write_status(t_philo_status status, t_philo *philo);
 
 //start_dinner.c
 void	thinking(t_philo *philo, bool pre_sim);
-void	*lonely_philo(void * data);
+void	*lonely_philo(void *data);
 void	eat(t_philo *philo);
 void	*dinner_sim(void *data);
 bool	start_dinner(t_data *data);
 
 //monitor.c
-bool 	philo_died(t_philo *philo);
+bool	philo_died(t_philo *philo);
 void	*monitor_dinner(void *data);

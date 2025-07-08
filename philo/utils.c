@@ -46,7 +46,7 @@ void	precise_usleep(long usec, t_data *data)
 			while ((get_time(MICROSECONDS) - start) < usec)
 				;
 		}
-	}	
+	}
 }
 
 void	clean(t_data *data)

@@ -14,8 +14,8 @@
 
 void	ft_assign_forks(t_philo *philo, t_fork *forks, int philo_position)
 {
-	int philo_nbr;
-	
+	int	philo_nbr;
+
 	philo_nbr = philo->data->philo_nbr;
 	if (philo->id % 2 == 0)
 	{
@@ -31,8 +31,8 @@ void	ft_assign_forks(t_philo *philo, t_fork *forks, int philo_position)
 
 void	ft_philo_init(t_data *data)
 {
-	int	i;
-	t_philo *philo;
+	int		i;
+	t_philo	*philo;
 
 	i = 0;
 	while (i < data->philo_nbr)
@@ -63,6 +63,7 @@ bool	data_init(t_data *data)
 	if (!data->forks)
 		return (false);
 	mutex_handler(&data->table_mutex, INIT);
+	mutex_handler(&data->write_lock, INIT);
 	while (i < data->philo_nbr)
 	{
 		mutex_handler(&data->forks[i].fork, INIT);

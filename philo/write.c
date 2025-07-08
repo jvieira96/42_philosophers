@@ -15,21 +15,21 @@
 void	write_status(t_philo_status status, t_philo *philo)
 {
 	long	elapsed;
-		
+
 	if (philo->full)
 		return ;
 	elapsed = get_time(MILISECONDS) - philo->data->start_dinner;
 	mutex_handler(&philo->data->write_lock, LOCK);
 	if ((status == TAKE_FIRST_FORK || status == TAKE_SECOND_FORK)
 		&& !simulation_finished(philo->data))
-		printf("%-6ld %d has taken a fork\n", elapsed, philo->id);
+		printf(CYAN"%-6ld %d has taken a fork\n"RESET, elapsed, philo->id);
 	else if (status == EATING && !simulation_finished(philo->data))
-		printf("%-6ld %d is eating\n", elapsed, philo->id);
+		printf(GREEN"%-6ld %d is eating\n"RESET, elapsed, philo->id);
 	else if (status == SLEEPING && !simulation_finished(philo->data))
-		printf("%-6ld %d is sleeping\n", elapsed, philo->id);
+		printf(BLUE"%-6ld %d is sleeping\n"RESET, elapsed, philo->id);
 	else if (status == THINKING && !simulation_finished(philo->data))
-		printf("%-6ld %d is thinking\n", elapsed, philo->id);
+		printf(YELLOW"%-6ld %d is thinking\n"RESET, elapsed, philo->id);
 	else if (status == DIED)
-		printf("%-6ld %d died\n", elapsed, philo->id);
+		printf(RED"%-6ld %d died\n"RESET, elapsed, philo->id);
 	mutex_handler(&philo->data->write_lock, UNLOCK);
 }

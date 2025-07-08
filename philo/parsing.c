@@ -31,7 +31,7 @@ bool	ft_isnumeric(char *str)
 
 bool	ft_isspace(char c)
 {
-	if ((c >= 9 && c <= 13 ) || c == 32)
+	if ((c >= 9 && c <= 13) || c == 32)
 		return (true);
 	return (false);
 }
@@ -39,7 +39,7 @@ bool	ft_isspace(char c)
 bool	ft_valid_input(char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	while (ft_isspace(str[i]))
 		i++;
@@ -54,7 +54,7 @@ bool	ft_valid_input(char *str)
 	}
 	if (!str[i])
 	{
-		printf(RED "Empty value" RESET "\n");																		
+		printf(RED "Empty value" RESET "\n");
 		return (false);
 	}
 	if (!ft_isnumeric(&str[i]))
@@ -92,8 +92,8 @@ int	parsing(t_data *data, char **args)
 {
 	data->philo_nbr = ft_atol(args[1]);
 	if (data->philo_nbr == PARSE_ERROR)
-		return(false);
-	data->time_to_die = ft_atol(args[2]) * 1e3; 
+		return (false);
+	data->time_to_die = ft_atol(args[2]) * 1e3;
 	if (data->time_to_die < 60000)
 		return (false);
 	data->time_to_eat = ft_atol(args[3]) * 1e3;
@@ -110,5 +110,5 @@ int	parsing(t_data *data, char **args)
 	}
 	else
 		data->nbr_times_eat = NO_TIMES_TO_EAT;
-	return (true) ;
+	return (true);
 }

@@ -6,11 +6,29 @@
 /*   By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 11:46:19 by jpedro-fvm        #+#    #+#             */
-/*   Updated: 2025/07/07 17:43:52 by jpedro-fvm       ###   ########.fr       */
+/*   Updated: 2025/07/08 12:30:21 by jpedro-fvm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	thinking(t_philo *philo, bool pre_sim)
+{
+	long	time_to_eat;
+	long	time_to_sleep;
+	long	time_to_think;
+
+	if (pre_sim == false)
+		write_status(THINKING, philo);	
+	if (philo->data->philo_nbr % 2 == 0)
+		return ;
+	time_to_eat = philo->data->time_to_eat;
+	time_to_sleep = philo->data->time_to_sleep;
+	time_to_think = time_to_eat * 2 - time_to_sleep;
+	if (time_to_think < 0)
+		time_to_think = 0;
+	precise_usleep(time_to_sleep * 0.42, philo->data);
+}
 
 /*
 	routine for lonely philo
@@ -56,18 +74,15 @@ void	*dinner_sim(void *data)
 	wait_all_threads(philo->data);
 	set_long(&philo->philo_mutex, &philo->last_meal, get_time(MILISECONDS));
 	increase_long(&philo->data->table_mutex,  &philo->data->nbr_threads_running);
+	de_sync_philos(philo);
 	while (!simulation_finished(philo->data))
 	{
-		// 1 check am i full?
 		if (philo->full)
 			break ;
-		// 2 eat
 		eat(philo);
-		// 3 sleep -> wriTe status & precise usleep
 		write_status(SLEEPING, philo);
 		precise_usleep(philo->data->time_to_sleep, philo->data);
-		// 4 thinking
-		write_status(THINKING, philo);
+		thinking(philo, false);
 	}
 	return (NULL);
 }

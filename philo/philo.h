@@ -6,7 +6,7 @@
 /*   By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 12:49:30 by jpedro-fvm        #+#    #+#             */
-/*   Updated: 2025/07/07 17:36:38 by jpedro-fvm       ###   ########.fr       */
+/*   Updated: 2025/07/08 12:32:22 by jpedro-fvm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ bool	simulation_finished(t_data *data);
 void	wait_all_threads(t_data *data);
 bool	all_threads_running(pthread_mutex_t *mutex, long *threads, long philo_nbr);
 void	increase_long(pthread_mutex_t *mutex, long *value);
+void	de_sync_philos(t_philo *philo);
 
 //utils.c
 long	get_time(t_time_code time_code);
@@ -133,6 +134,8 @@ void	clean(t_data *data);
 void	write_status(t_philo_status status, t_philo *philo);
 
 //start_dinner.c
+void	thinking(t_philo *philo, bool pre_sim);
+void	*lonely_philo(void * data);
 void	eat(t_philo *philo);
 void	*dinner_sim(void *data);
 bool	start_dinner(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: jpedro-fvm <jpedro-fvm@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:45:38 by jpedro-fvm        #+#    #+#             */
-/*   Updated: 2025/07/07 16:39:39 by jpedro-fvm       ###   ########.fr       */
+/*   Updated: 2025/07/08 12:29:57 by jpedro-fvm       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,18 @@ void	increase_long(pthread_mutex_t *mutex, long *value)
 	mutex_handler(mutex, LOCK);
 	(*value)++;
 	mutex_handler(mutex, UNLOCK);
+}
+
+/*
+	Fairness
+*/
+void	de_sync_philos(t_philo *philo)
+{
+	if (philo->data->philo_nbr % 2 == 0)
+	{
+		if (philo->id % 2 ==0)
+			precise_usleep(3e4, philo->data);
+	}
+	else
+		thinking(philo, true);
 }

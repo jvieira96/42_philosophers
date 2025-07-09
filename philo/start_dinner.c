@@ -24,10 +24,10 @@ void	thinking(t_philo *philo, bool pre_sim)
 		return ;
 	time_to_eat = philo->data->time_to_eat;
 	time_to_sleep = philo->data->time_to_sleep;
-	time_to_think = time_to_eat * 2 - time_to_sleep;
+	time_to_think = (time_to_eat * 2) - time_to_sleep;
 	if (time_to_think < 0)
 		time_to_think = 0;
-	precise_usleep(time_to_think * 0.42, philo->data);
+	precise_usleep(time_to_think * 0.46, philo->data);
 }
 
 /*
@@ -42,8 +42,7 @@ void	*lonely_philo(void *data)
 	philo = (t_philo *)data;
 	wait_all_threads(philo->data);
 	set_long(&philo->philo_mutex, &philo->last_meal, get_time(MILISECONDS));
-	increase_long(&philo->data->table_mutex, \
-&philo->data->nbr_threads_running);
+	increase_long(&philo->data->table_mutex, &philo->data->nbr_threads_running);
 	write_status(TAKE_FIRST_FORK, philo);
 	while (!simulation_finished(philo->data))
 		;
@@ -74,8 +73,7 @@ void	*dinner_sim(void *data)
 	philo = (t_philo *)data;
 	wait_all_threads(philo->data);
 	set_long(&philo->philo_mutex, &philo->last_meal, get_time(MILISECONDS));
-	increase_long(&philo->data->table_mutex, \
-&philo->data->nbr_threads_running);
+	increase_long(&philo->data->table_mutex, &philo->data->nbr_threads_running);
 	de_sync_philos(philo);
 	while (!simulation_finished(philo->data))
 	{
@@ -93,22 +91,22 @@ bool	start_dinner(t_data *data)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	if (data->nbr_times_eat == 0)
 		return (false);
 	else if (data->philo_nbr == 1)
-		thread_handle(&data->philo[0].thread_id, \
-lonely_philo, &data->philo[0], CREATE);
+		thread_handle(&data->philo[0].thread_id, lonely_philo,
+			&data->philo[0], CREATE);
 	else
 	{
 		while (++i < data->philo_nbr)
-			thread_handle(&data->philo[i].thread_id, \
-dinner_sim, &data->philo[i], CREATE);
+			thread_handle(&data->philo[i].thread_id, dinner_sim,
+				&data->philo[i], CREATE);
 	}
 	thread_handle(&data->monitor, monitor_dinner, data, CREATE);
 	data->start_dinner = get_time(MILISECONDS);
 	set_bool(&data->table_mutex, &data->all_threads_ready, true);
-	i = 0;
+	i = -1;
 	while (++i < data->philo_nbr)
 		thread_handle(&data->philo[i].thread_id, NULL, NULL, JOIN);
 	set_bool(&data->table_mutex, &data->end_dinner, true);

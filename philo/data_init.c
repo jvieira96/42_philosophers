@@ -34,8 +34,8 @@ void	ft_philo_init(t_data *data)
 	int		i;
 	t_philo	*philo;
 
-	i = 0;
-	while (i < data->philo_nbr)
+	i = -1;
+	while (++i < data->philo_nbr)
 	{
 		philo = data->philo + i;
 		philo->id = i + 1;
@@ -44,7 +44,6 @@ void	ft_philo_init(t_data *data)
 		philo->data = data;
 		mutex_handler(&philo->philo_mutex, INIT);
 		ft_assign_forks(philo, data->forks, i);
-		i++;
 	}
 }
 
@@ -52,7 +51,7 @@ bool	data_init(t_data *data)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	data->end_dinner = false;
 	data->all_threads_ready = false;
 	data->nbr_threads_running = 0;
@@ -64,10 +63,10 @@ bool	data_init(t_data *data)
 		return (false);
 	mutex_handler(&data->table_mutex, INIT);
 	mutex_handler(&data->write_lock, INIT);
-	while (i < data->philo_nbr)
+	while (++i < data->philo_nbr)
 	{
 		mutex_handler(&data->forks[i].fork, INIT);
-		i++;
+		data->forks[i].fork_id = i;
 	}
 	ft_philo_init(data);
 	return (true);

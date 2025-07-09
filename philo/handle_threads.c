@@ -24,7 +24,7 @@ void	mutex_handler(pthread_mutex_t *mutex, t_opcode opcode)
 		pthread_mutex_destroy(mutex);
 }
 
-void	thread_handle(pthread_t *thread, void *(*routine)(void*), \
+void	thread_handle(pthread_t *thread, void *(*routine)(void*),
 void *data, t_opcode opcode)
 {
 	if (opcode == CREATE)

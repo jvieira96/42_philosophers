@@ -58,7 +58,7 @@ typedef enum e_philo_status
 
 typedef struct s_fork
 {
-	int				fork_id;
+	long			fork_id;
 	pthread_mutex_t	fork;
 }					t_fork;
 
@@ -84,7 +84,7 @@ typedef struct s_data
 
 typedef struct s_philo
 {
-	int				id;
+	long			id;
 	pthread_t		thread_id;
 	long			last_meal;
 	long			meals_counter;

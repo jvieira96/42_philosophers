@@ -38,7 +38,7 @@ OBJS = $(SRCS:.c=.o)
 
 C_COMP = cc
 
-C_FLAGS = -Wall -Werror -Wextra -pthread -g -fsanitize=thread
+C_FLAGS = -Wall -Werror -Wextra -pthread -g #-fsanitize=thread
 
 RM = rm -f 
 

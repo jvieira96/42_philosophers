@@ -23,10 +23,10 @@ bool	philo_died(t_philo *philo)
 
 	if (get_bool(&philo->philo_mutex, &philo->full))
 		return (false);
-	elapsed = get_time(MILISECONDS) - \
-get_long(&philo->philo_mutex, &philo->last_meal);
-	time_to_die = philo->data->time_to_die / 1e3;
-	if (time_to_die < elapsed)
+	elapsed = get_time(MILISECONDS) - get_long(&philo->philo_mutex,
+			&philo->last_meal);
+	time_to_die = philo->data->time_to_die / 1000;
+	if (elapsed > time_to_die)
 		return (true);
 	return (false);
 }
@@ -37,20 +37,19 @@ void	*monitor_dinner(void *data)
 	int		i;
 
 	table = (t_data *)data;
-	while (!all_threads_running(&table->table_mutex, \
-&table->nbr_threads_running, table->philo_nbr))
+	while (!all_threads_running(&table->table_mutex,
+			&table->nbr_threads_running, table->philo_nbr))
 		;
 	while (!simulation_finished(table))
 	{
-		i = 0;
-		while (i < table->philo_nbr)
+		i = -1;
+		while (++i < table->philo_nbr && !simulation_finished(table))
 		{
-			if (philo_died(table->philo + i) && !simulation_finished(table))
+			if (philo_died(table->philo + i))
 			{
 				set_bool(&table->table_mutex, &table->end_dinner, true);
 				write_status(DIED, table->philo + i);
 			}
-			i++;
 		}
 	}
 	return (NULL);

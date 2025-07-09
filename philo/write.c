@@ -16,20 +16,20 @@ void	write_status(t_philo_status status, t_philo *philo)
 {
 	long	elapsed;
 
+	elapsed = get_time(MILISECONDS) - philo->data->start_dinner;
 	if (philo->full)
 		return ;
-	elapsed = get_time(MILISECONDS) - philo->data->start_dinner;
 	mutex_handler(&philo->data->write_lock, LOCK);
 	if ((status == TAKE_FIRST_FORK || status == TAKE_SECOND_FORK)
 		&& !simulation_finished(philo->data))
-		printf(CYAN"%-6ld %d has taken a fork\n"RESET, elapsed, philo->id);
+		printf(CYAN"%-6ld %ld has taken a fork\n"RESET, elapsed, philo->id);
 	else if (status == EATING && !simulation_finished(philo->data))
-		printf(GREEN"%-6ld %d is eating\n"RESET, elapsed, philo->id);
+		printf(GREEN"%-6ld %ld is eating\n"RESET, elapsed, philo->id);
 	else if (status == SLEEPING && !simulation_finished(philo->data))
-		printf(BLUE"%-6ld %d is sleeping\n"RESET, elapsed, philo->id);
+		printf(BLUE"%-6ld %ld is sleeping\n"RESET, elapsed, philo->id);
 	else if (status == THINKING && !simulation_finished(philo->data))
-		printf(YELLOW"%-6ld %d is thinking\n"RESET, elapsed, philo->id);
+		printf(YELLOW"%-6ld %ld is thinking\n"RESET, elapsed, philo->id);
 	else if (status == DIED)
-		printf(RED"%-6ld %d died\n"RESET, elapsed, philo->id);
+		printf(RED"%-6ld %ld died\n"RESET, elapsed, philo->id);
 	mutex_handler(&philo->data->write_lock, UNLOCK);
 }

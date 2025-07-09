@@ -24,7 +24,7 @@ void	wait_all_threads(t_data *data)
 /*
 	monitor waits untill all threads are running
 */
-bool	all_threads_running(pthread_mutex_t *mutex, \
+bool	all_threads_running(pthread_mutex_t *mutex,
 long *threads, long philo_nbr)
 {
 	bool	ret;
@@ -55,7 +55,9 @@ void	de_sync_philos(t_philo *philo)
 	if (philo->data->philo_nbr % 2 == 0)
 	{
 		if (philo->id % 2 == 0)
-			precise_usleep(3e4, philo->data);
+		{
+			precise_usleep(30000, philo->data);
+		}
 	}
 	else
 	{

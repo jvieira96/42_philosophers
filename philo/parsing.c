@@ -93,20 +93,20 @@ int	parsing(t_data *data, char **args)
 	data->philo_nbr = ft_atol(args[1]);
 	if (data->philo_nbr == PARSE_ERROR)
 		return (false);
-	data->time_to_die = ft_atol(args[2]) * 1e3;
+	data->time_to_die = ft_atol(args[2]) * 1000;
 	if (data->time_to_die < 60000)
 		return (false);
-	data->time_to_eat = ft_atol(args[3]) * 1e3;
+	data->time_to_eat = ft_atol(args[3]) * 1000;
 	if (data->time_to_eat < 60000)
 		return (false);
-	data->time_to_sleep = ft_atol(args[4]) * 1e3;
+	data->time_to_sleep = ft_atol(args[4]) * 1000;
 	if (data->time_to_sleep < 60000)
 		return (false);
 	if (args[5])
 	{
 		data->nbr_times_eat = ft_atol(args[5]);
 		if (data->nbr_times_eat == PARSE_ERROR)
-			return (data->nbr_times_eat);
+			return (false);
 	}
 	else
 		data->nbr_times_eat = NO_TIMES_TO_EAT;

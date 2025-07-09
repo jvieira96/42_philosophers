@@ -2,8 +2,6 @@
 
 The **Philosophers** project is a core part of the 42 School curriculum, designed to introduce key concepts of **concurrent programming** and **thread synchronization**. The goal is to simulate the dining philosophers problem — a classic concurrency challenge — while avoiding issues like **deadlocks**, **race conditions**, and **starvation**.
 
---
-
 Throughout this project, I deepened my understanding of:
 
 - 🧵 **Multithreading**: Creating and managing threads with `pthread_create` and `pthread_join`.
@@ -32,7 +30,7 @@ Throughout this project, I deepened my understanding of:
   - Timestamped output for each philosopher's state: thinking, eating, sleeping, died
   - Avoiding data races on `printf` via a global write mutex
 
-## ⚙️ Implementation Highlights
+## ⚙️ Implementation
 
 - Each philosopher is a **separate thread**, running a loop of:
   1. Taking forks (mutex lock)
@@ -54,11 +52,3 @@ Throughout this project, I deepened my understanding of:
 - ✅ Avoiding **starvation** by tracking each philosopher’s eating times
 - ✅ Ensuring **precise timing**, even under CPU load
 - ✅ Keeping output **synchronized** to prevent mixed logs
-
-## 🧠 Key Takeaways
-
-This project gave me hands-on experience with **low-level concurrency**, strengthened my understanding of how **OS-level threads and synchronization mechanisms** work, and showed me how subtle timing and state issues can break a seemingly simple simulation. It also emphasized the importance of **deterministic behavior** in multi-threaded applications.
-
----
-
-Made with ⚙️ and 🧠 by [Your Name] — 42 [Your Campus]
